@@ -5,7 +5,8 @@ from fastapi import FastAPI
 # git commit -m "message"
 # git push origin main
 # https://dailyreminderapi.onrender.com
-# https://dailyreminderapi.onrender.com/items/123
+# https://dailyreminderapi.onrender.com/items/12
+# https://dashboard.render.com/web/srv-d5hc3jadbo4c73dtsh3g/deploys/dep-d5hcstq4d50c7390mlk0
 
 
 app = FastAPI()
@@ -26,13 +27,13 @@ def get_settings():
 
 @app.put("/settings/")
 def update_item(data: dict):
-    if data["kyber"]=="crystal":
-        del data["kyber"]
-        json_string = json.dumps(data)
-        save_file("settings.txt",json_string)
-        return {
-            "message": "Received dictionary",
-            "received":json_string
+    #if data["kyber"]=="crystal":
+        #del data["kyber"]
+    json_string = json.dumps(data)
+    save_file("settings.txt",json_string)
+    return {
+        "message": "Received dictionary",
+        "received":json_string
         }
 
 def save_file(file_path:str,file_content:str):
