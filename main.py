@@ -22,3 +22,10 @@ def read_item(item_id: int, q: Optional[str] = None):
 @app.get("/settings/")
 def get_settings():
     return {"is_logging": False}
+
+@app.put("/settings/")
+def update_item(data: dict):
+    return {
+        "message": "Received dictionary",
+        "received": data
+    }
