@@ -1,5 +1,5 @@
+import json
 from typing import Optional
-
 from fastapi import FastAPI
 # git add .
 # git commit -m "message"
@@ -21,11 +21,31 @@ def read_item(item_id: int, q: Optional[str] = None):
 
 @app.get("/settings/")
 def get_settings():
-    return {"is_logging": False}
+    read_file("settings.txt")
+    return read_file("settings.txt")
 
 @app.put("/settings/")
 def update_item(data: dict):
+    json_string = json.dumps(data)
+    save_file("settings.txt",json_string)
     return {
         "message": "Received dictionary",
-        "received": data
+        "received":json_string
     }
+
+def save_file(file_path:str,file_content:str):
+    try:
+        with open(file_path, "w") as file:
+            file.write(file_content)
+    except Exception as e:
+        return f"An error occurred while saving the file: {e}"
+
+def read_file(file_path:str)->str:
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            return content
+    except FileNotFoundError:
+        return f"Error: The file '{file_path}' was not found."
+    except Exception as e:
+        return f"An error occurred while reading the file: {e}"
