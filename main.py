@@ -26,12 +26,14 @@ def get_settings():
 
 @app.put("/settings/")
 def update_item(data: dict):
-    json_string = json.dumps(data)
-    save_file("settings.txt",json_string)
-    return {
-        "message": "Received dictionary",
-        "received":json_string
-    }
+    if data["kyber"]=="crystal":
+        del data["kyber"]
+        json_string = json.dumps(data)
+        save_file("settings.txt",json_string)
+        return {
+            "message": "Received dictionary",
+            "received":json_string
+        }
 
 def save_file(file_path:str,file_content:str):
     try:
