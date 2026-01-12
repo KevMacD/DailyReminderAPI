@@ -40,7 +40,7 @@ def save_file(file_path:str,file_content:str):
     except Exception as e:
         return f"An error occurred while saving the file: {e}"
 
-def read_file(file_path:str)->s{}:
+def read_file(file_path:str)->{}:
     return_dict = {}
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
