@@ -46,16 +46,16 @@ def read_file(file_path:str)->{}: # type: ignore
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
             return_dict["response"]=True # type: ignore
-            return_dict["message"}]= "API:File Found and succesfully Read" # type: ignore
-            return_dict["data"]=content} # type: ignore
+            return_dict["message"]= "API:File Found and succesfully Read" # type: ignore
+            return_dict["data"]=content # type: ignore
             return return_dict
     except FileNotFoundError:
         return_dict["response"]= False # type: ignore
-        return_dict["message"] =f"API Error: The file '{file_path}' was not found."} # type: ignore
+        return_dict["message"] =f"API Error: The file '{file_path}' was not found." # type: ignore
         return_dict["data"]=Null # type: ignore
         return return_dict
     except Exception as e:
         return_dict["response"]= False # type: ignore
-        return_dict["message"] =f"API: An error occurred while reading the file: {e}"} # type: ignore
+        return_dict["message"] =f"API: An error occurred while reading the file: {e}" # type: ignore
         return_dict["data"]=Null # type: ignore
         return return_dict
