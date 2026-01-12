@@ -21,24 +21,25 @@ def get_settings():
     return read_file("settings.txt")
 
 @app.put("/settings/")
-def update_item(data: dict):
+def update_settings(data: dict):
     if data["kyber"]=="crystal":
-        data["Yes"]="Password"
-        
-        #del data["kyber"]
-    json_string = json.dumps(data)
-    save_file("settings.txt",json_string)
-    return {
-        "message": "Received dictionary",
-        "received":json_string
-        }
+        data["Yes"]="Password"        
+        del data["kyber"]
 
-def save_file(file_path:str,file_content:str):
+    json_string = json.dumps(data)
+    respone_dict = save_file("settings.txt",json_string)
+    return save_file("settings.txt",json_string)
+
+
+def save_file(file_path:str,file_content:str)->{}: # type: ignore
     try:
         with open(file_path, "w") as file:
             file.write(file_content)
+            return_dict["response"]= True # type: ignore
     except Exception as e:
-        return f"An error occurred while saving the file: {e}"
+        return 
+        return_dict["response"]= False # type: ignore
+        return_dict["message"] =f"An error occurred while saving the file: {e}" # type: ignore
 
 def read_file(file_path:str)->{}: # type: ignore
     return_dict = {}
