@@ -22,13 +22,14 @@ def get_settings():
 
 @app.put("/settings/")
 def update_settings(data: dict):
-    # if data["kyber"]=="crystal":
-    #     data["Yes"]="Password"        
-    #     del data["kyber"]
-
-    json_string = json.dumps(data)
-    respone_dict = save_file("settings.txt",json_string)
-    return save_file("settings.txt",json_string)
+    if data["kyber"]=="crystal":       
+        del data["kyber"]
+        json_string = json.dumps(data)
+        return save_file("settings.txt",json_string)
+    else:
+        return_dict["response"]= False # type: ignore
+        return_dict["message"] =f"API Error: Incorrect Credentials" # type: ignore
+        return return_dict # type: ignore
 
 
 def save_file(file_path:str,file_content:str)->{}: # type: ignore
@@ -37,9 +38,9 @@ def save_file(file_path:str,file_content:str)->{}: # type: ignore
             file.write(file_content)
             return_dict["response"]= True # type: ignore
     except Exception as e:
-        return 
         return_dict["response"]= False # type: ignore
         return_dict["message"] =f"An error occurred while saving the file: {e}" # type: ignore
+        return return_dict # type: ignore
 
 def read_file(file_path:str)->{}: # type: ignore
     return_dict = {}
