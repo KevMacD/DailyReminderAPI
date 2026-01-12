@@ -16,10 +16,6 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "Lightsaber": q}
-
 @app.get("/settings/")
 def get_settings():
     read_file("settings.txt")
@@ -27,7 +23,9 @@ def get_settings():
 
 @app.put("/settings/")
 def update_item(data: dict):
-    #if data["kyber"]=="crystal":
+    if data["kyber"]=="crystal":
+        data["Yes"]="Password"
+        
         #del data["kyber"]
     json_string = json.dumps(data)
     save_file("settings.txt",json_string)
