@@ -22,9 +22,9 @@ def get_settings():
 
 @app.put("/settings/")
 def update_settings(data: dict):
-    if data["kyber"]=="crystal":
-        data["Yes"]="Password"        
-        del data["kyber"]
+    # if data["kyber"]=="crystal":
+    #     data["Yes"]="Password"        
+    #     del data["kyber"]
 
     json_string = json.dumps(data)
     respone_dict = save_file("settings.txt",json_string)
